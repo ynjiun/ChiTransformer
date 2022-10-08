@@ -1,0 +1,6 @@
+**/output*
+**/log
+**/input*
+*.pyc
+**/weight*
+

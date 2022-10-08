@@ -166,7 +166,7 @@ class StereoCriterion(nn.Module):
     
         mask = self.fp_weighted_mask(inputs[("color", 'l', 0)],
                                 inputs[("color", 'r', 0)]) #[B, h, w]
-        pred = outputs[("depth", 0)] #[B, h, w]
+        pred = outputs[("depth", 0)].squeeze() #[B, h, w]: ypw: [B,1,h,w]=>squeeze=>[B,1,h,w] bug fix?
                 
         if mask.sum().item() != 0.:
             fp_to_optimise = pred[mask > 0.]
@@ -392,6 +392,7 @@ class StereoCriterion(nn.Module):
         mask = mask * crop_mask
 
         gt = gt[mask]
+        pred=pred.squeeze() #ypw: [B,1,h,w]=>[B,h,w] bug fix?
         pred = pred[mask]
 
         thresh = torch.max((gt / pred), (pred / gt))

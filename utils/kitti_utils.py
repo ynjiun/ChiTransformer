@@ -153,7 +153,7 @@ class BackprojectDepth(nn.Module):
 
     def forward(self, depth, inv_K):
                              
-        B, _, h, w = depth.shape #[B, 1, h, w]
+        B,_,_, h, w = depth.shape #[B, 1, h, w] ypw: was B,_,h,w = depth.shape bug fix?
         #inv_K [B, 4, 4]
                              
         cam_points = torch.matmul(inv_K[:, :3, :3], self.pix_coords) #[B, 3, h*w]

@@ -81,6 +81,8 @@ def run(input_path, output_path, model_path=None, optimize=True):
         name = img_name_2.split("/")[-1]
         
         img_name_3 = os.path.join(input_path, 'image_3', name)
+        if ('left' in img_name_3) or ('Left' in img_name_3) : #ypw: for carla dataset
+            img_name_3 = img_name_3.replace('left','right').replace('Left','Right')
         if os.path.isdir(img_name_3):
             continue
 

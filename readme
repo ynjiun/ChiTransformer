@@ -1,0 +1,5 @@
+workon ChiTransformer
+
+#in eclipse
+conda-pytorch3d
+
